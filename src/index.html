@@ -1,12 +1,75 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Objektorienterad programmering">
     <title>DT208G - Moment 2</title>
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/5f4c540c40.js" crossorigin="anonymous" type="module"></script>
+    <script src="../todo.js" type="module"></script>
 </head>
+
 <body>
-    
+    <header>
+        <h1>Moment 2 <i class="fa-regular fa-note-sticky note-icon"></i></h1>
+    </header>
+    <main>
+        <div class="content-wrap">
+            <form>
+                <h2>Lägg till ny uppgift</h2>
+
+                <label for="todo-text">Uppgift:</label>
+                <br>
+                <textarea name="todo" id="todo-text" cols="30" rows="5"></textarea>
+                <br>
+                <label for="priority">Prioritet från 1-3 där 1 är viktigast</label>
+                <select name="priority" id="priority">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                <div class="btn-submit-wrap">
+                    <input type="submit" value="Lägg till" id="btn-submit">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            </form>
+
+            <span id="line"></span>
+
+            <div class="todo-list">
+                <h2>To do lista</h2>
+                <article>
+                    <h3><span class="priority-num">1</span>Handla mat</h3>
+                    <div class="btn-wrap">
+                        <button class="btn-finished">Avklarad</button>
+                        <button class="btn-delete">Ta bort</button>
+                    </div>
+                </article>
+
+                <article>
+                    <h3><span class="priority-num">2</span>Gymma</h3>
+                    <div class="btn-wrap">
+                        <button class="btn-finished">Avklarad</button>
+                        <button class="btn-delete">Ta bort</button>
+                    </div>
+                </article>
+
+                <article>
+                    <h3><span class="priority-num">3</span>Köpa födelsedagspresent</h3>
+                    <div class="btn-wrap">
+                        <button class="btn-finished">Avklarad</button>
+                        <button class="btn-delete">Ta bort</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+
+    </main>
 </body>
+
 </html>
