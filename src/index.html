@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/5f4c540c40.js" crossorigin="anonymous" type="module"></script>
-    <script src="../todo.js" type="module"></script>
+    <script src="../main.js" type="module"></script>
 </head>
 
 <body>
@@ -33,39 +33,19 @@
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
-                <div class="btn-submit-wrap">
-                    <input type="submit" value="Lägg till" id="btn-submit">
-                    <i class="fa-solid fa-plus"></i>
-                </div>
+
+                <input type="submit" value="Lägg till" id="btn-submit">
+                <i class="fa-solid fa-plus"></i>
+
             </form>
 
             <span id="line"></span>
 
             <div class="todo-list">
                 <h2>To do lista</h2>
-                <article>
-                    <h3><span class="priority-num">1</span>Handla mat</h3>
-                    <div class="btn-wrap">
-                        <button class="btn-finished">Avklarad</button>
-                        <button class="btn-delete">Ta bort</button>
-                    </div>
-                </article>
+                <div class="todo-wrap">
 
-                <article>
-                    <h3><span class="priority-num">2</span>Gymma</h3>
-                    <div class="btn-wrap">
-                        <button class="btn-finished">Avklarad</button>
-                        <button class="btn-delete">Ta bort</button>
-                    </div>
-                </article>
-
-                <article>
-                    <h3><span class="priority-num">3</span>Köpa födelsedagspresent</h3>
-                    <div class="btn-wrap">
-                        <button class="btn-finished">Avklarad</button>
-                        <button class="btn-delete">Ta bort</button>
-                    </div>
-                </article>
+                </div>
             </div>
         </div>
 

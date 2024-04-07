@@ -1,7 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TodoList = void 0;
+//Implementerar interface Todo i en klass
 var TodoList = /** @class */ (function () {
     function TodoList() {
         this.todos = [];
+        this.loadFromLocalStorage();
     }
+    //Metod för nya todos med prioriteringar
     TodoList.prototype.addTodo = function (task, priority) {
         if (task && task != "" && priority && priority > 0 && priority < 4) {
             var todo = { task: task, priority: priority, completed: false };
@@ -12,9 +18,32 @@ var TodoList = /** @class */ (function () {
             return false;
         }
     };
+    //Metod för att markera todos som klara
+    TodoList.prototype.markTodoCompleted = function (todoIndex) {
+        if (todoIndex >= 0 && todoIndex <= this.todos.length) {
+            this.todos[todoIndex].completed = true;
+        }
+    };
+    //Metod för att hämta alla todos 
+    TodoList.prototype.getTodos = function () {
+        return this.todos;
+    };
+    //Sparar lista i local storage
+    TodoList.prototype.saveToLocalStorage = function () {
+        //Omvandla till sträng
+        var todosList = JSON.stringify(this.todos);
+        //Spara i LocalStorage
+        localStorage.setItem("todos", todosList);
+    };
+    TodoList.prototype.loadFromLocalStorage = function () {
+        var storedTodos = localStorage.getItem('todos');
+        if (storedTodos && storedTodos != "") {
+            this.todos = JSON.parse(storedTodos);
+        }
+        else {
+            this.todos = [];
+        }
+    };
     return TodoList;
 }());
-var newList = new TodoList();
-console.log(newList.todos);
-newList.addTodo("Hej", 2);
-console.log(newList.todos);
+exports.TodoList = TodoList;

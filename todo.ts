@@ -1,5 +1,5 @@
 //Interface Todo
-interface Todo {
+export interface Todo {
     task: string;
     completed: boolean;
     priority: number
@@ -7,7 +7,7 @@ interface Todo {
 }
 
 //Implementerar interface Todo i en klass
-class TodoList {
+export class TodoList {
     private todos: Todo[];
 
     constructor() {
