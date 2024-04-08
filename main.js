@@ -11,12 +11,16 @@ function submitTodo(event) {
     //Hämta DOM element
     var toDoText = document.getElementById("todo-text");
     var selectPrio = document.getElementById("priority");
-    todo.addTodo(toDoText.value, Number(selectPrio.value)); //Test
-    var toDoListWrap = document.querySelector(".todo-wrap");
-    toDoListWrap.replaceChildren(); //Tar bort tidigare todos
-    todo.getTodos().forEach(function (todoEl) {
-        makeToDo(toDoListWrap, todoEl);
-    });
+    //Kontrollera tom textsträng
+    var trimText = toDoText.value.trim();
+    if (trimText !== '') {
+        todo.addTodo(toDoText.value.trim(), Number(selectPrio.value));
+        var toDoListWrap_1 = document.querySelector(".todo-wrap");
+        toDoListWrap_1.replaceChildren(); //Tar bort tidigare todos
+        todo.getTodos().forEach(function (todoEl) {
+            makeToDo(toDoListWrap_1, todoEl);
+        });
+    }
 }
 //Skriva ut till DOM
 function makeToDo(toDoListWrap, todoEl) {

@@ -6,13 +6,13 @@
 
 html {
     font-size: 62.5%;
+    font-family: "Reddit Mono", monospace;
 }
 
 body {
     max-width: 1920px;
     width: 100%;
     background-color: #f1f1f1;
-    font-family: "Reddit Mono", monospace;
 }
 
 header h1 {
@@ -35,7 +35,7 @@ header {
 }
 
 h2 {
-    font-size: 2.4rem;
+    font-size: 2.8rem;
     margin-bottom: 2rem;
 }
 
@@ -73,10 +73,11 @@ form {
     border: 0.2rem solid #074772;
     padding: 1rem;
     resize: vertical;
+    font-size: 1.6rem;
 }
 
 /*Fixa button submit*/
-.btn-submit-wrap {
+#btn-submit{
     display: block;
     width: 100%;
     max-width: 100%;
@@ -92,17 +93,11 @@ form {
     color: white;
 }
 
-.btn-submit-wrap:hover {
+.btn-submit:hover {
     background-color: rgb(57, 60, 61);
 }
 
-#btn-submit {
-    border: none;
-    background-color: unset;
-    cursor: pointer;
-    font-size: 2rem;
-    color: white;
-}
+
 
 .todo-list {
     width: 100%;
@@ -114,20 +109,44 @@ article {
     background-color: white;
     width: 100%;
     border-radius: 0 2rem 2rem 0;
-    padding: 0 2rem 2rem 0;
 }
 
 h3 {
     margin: 2rem;
+    font-size: 2.2rem;
 }
 
 .priority-num {
     margin: 0 1rem 0 -4rem;
     border-radius: 50rem;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1.8rem;
     color: white;
 }
 
 .btn-wrap {
-    margin: 2rem;
+    display: flex;
+    justify-content: end;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.btn-finished, .btn-delete {
+    padding: 1rem;
+    border-radius: 1rem;
+    border: none;
+    font-size: 2rem;
+}
+
+.btn-delete {
+    background-color: #074772;
+    color: white;
+}
+
+#priority {
+    padding: 0.3rem;
+    margin-top: 1rem;
+}
+
+label {
+    font-size: 1.6rem;
 }

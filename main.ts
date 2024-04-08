@@ -19,14 +19,20 @@ function submitTodo(event): void {
     let toDoText = document.getElementById("todo-text") as HTMLTextAreaElement;
     let selectPrio = document.getElementById("priority") as HTMLSelectElement;
 
-    todo.addTodo(toDoText.value, Number(selectPrio.value)); //Test
+    //Kontrollera tom textsträng
+    let trimText = toDoText.value.trim();
 
-    let toDoListWrap = document.querySelector(".todo-wrap") as HTMLDivElement;
-    toDoListWrap.replaceChildren(); //Tar bort tidigare todos
+    if (trimText !== '') {
+        todo.addTodo(toDoText.value.trim(), Number(selectPrio.value)); 
 
-    todo.getTodos().forEach(todoEl => {
-        makeToDo(toDoListWrap, todoEl);
-    });
+        let toDoListWrap = document.querySelector(".todo-wrap") as HTMLDivElement;
+        toDoListWrap.replaceChildren(); //Tar bort tidigare todos
+    
+        todo.getTodos().forEach(todoEl => {
+            makeToDo(toDoListWrap, todoEl);
+        });
+    }
+
 }
 
 //Skriva ut till DOM
