@@ -25,6 +25,7 @@ var TodoList = /** @class */ (function () {
             this.saveToLocalStorage();
         }
     };
+    //Metod för att ta bort todos
     TodoList.prototype.markTodoDeleted = function (todoIndex) {
         if (todoIndex >= 0 && todoIndex <= this.todos.length) {
             this.todos.splice(todoIndex, 1);

@@ -4,7 +4,7 @@ window.onload = refreshTodos;
 
 let todo: TodoList = new TodoList();
 
-console.log(todo.getTodos());
+//console.log(todo.getTodos());
 
 //Hämta submitknapp
 let btnSubmit = document.getElementById("btn-submit") as HTMLInputElement;
@@ -44,9 +44,9 @@ function submitTodo(event): void {
 
 //Skriva ut till DOM
 function makeToDo(toDoListWrap: HTMLDivElement, todoEl: Todo, index: number) {
-    console.log("Todo task:", todoEl.task);
-    console.log("Priority:", todoEl.priority);
-    console.log("Completed:", todoEl.completed);
+    //console.log("Todo task:", todoEl.task);
+    //console.log("Priority:", todoEl.priority);
+    //console.log("Completed:", todoEl.completed);
 
     let articleEl = document.createElement("article");
     let h3El = document.createElement("h3");

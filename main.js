@@ -96,6 +96,7 @@ function resetTodoInput(toDoText, selectPrio) {
 function refreshTodos() {
     var toDoListWrap = document.querySelector(".todo-wrap");
     toDoListWrap.replaceChildren(); //Tar bort tidigare todos
+    //Sortera todos efter priority ordning
     var sortedTodos = todo.getTodos().sort(function (a, b) { return a.priority - b.priority; });
     sortedTodos.forEach(function (todoEl, index) {
         makeToDo(toDoListWrap, todoEl, index);

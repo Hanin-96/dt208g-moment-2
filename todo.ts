@@ -56,7 +56,7 @@ export class TodoList {
 
     loadFromLocalStorage(): void {
 
-        console.log("Loading todos from localstorage!");
+        //console.log("Loading todos from localstorage!");
         let storedTodos = localStorage.getItem('todos') as string;
         if (storedTodos && storedTodos != "") {
             this.todos = JSON.parse(storedTodos);
