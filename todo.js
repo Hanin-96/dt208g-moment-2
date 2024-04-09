@@ -22,6 +22,13 @@ var TodoList = /** @class */ (function () {
     TodoList.prototype.markTodoCompleted = function (todoIndex) {
         if (todoIndex >= 0 && todoIndex <= this.todos.length) {
             this.todos[todoIndex].completed = true;
+            this.saveToLocalStorage();
+        }
+    };
+    TodoList.prototype.markTodoDeleted = function (todoIndex) {
+        if (todoIndex >= 0 && todoIndex <= this.todos.length) {
+            this.todos.splice(todoIndex, 1);
+            this.saveToLocalStorage();
         }
     };
     //Metod för att hämta alla todos 
@@ -36,6 +43,7 @@ var TodoList = /** @class */ (function () {
         localStorage.setItem("todos", todosList);
     };
     TodoList.prototype.loadFromLocalStorage = function () {
+        console.log("Loading todos from localstorage!");
         var storedTodos = localStorage.getItem('todos');
         if (storedTodos && storedTodos != "") {
             this.todos = JSON.parse(storedTodos);

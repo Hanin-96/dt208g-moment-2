@@ -1,5 +1,6 @@
 import { TodoList, Todo } from "./todo";
 
+window.onload = refreshTodos;
 
 let todo: TodoList = new TodoList();
 
@@ -23,20 +24,26 @@ function submitTodo(event): void {
     let trimText = toDoText.value.trim();
 
     if (trimText !== '') {
-        todo.addTodo(toDoText.value.trim(), Number(selectPrio.value)); 
+        let newTodo: Todo = {} as Todo;
+        newTodo.task = toDoText.value.trim();
+        newTodo.priority = Number(selectPrio.value)
+        newTodo.completed = false;
 
-        let toDoListWrap = document.querySelector(".todo-wrap") as HTMLDivElement;
-        toDoListWrap.replaceChildren(); //Tar bort tidigare todos
-    
-        todo.getTodos().forEach(todoEl => {
-            makeToDo(toDoListWrap, todoEl);
-        });
+        todo.addTodo(newTodo.task, newTodo.priority);
+
+        // Tar bort och lägger till nya todos
+        refreshTodos();
+
+        resetTodoInput(toDoText, selectPrio);
+        todo.saveToLocalStorage();
     }
 
 }
 
+
+
 //Skriva ut till DOM
-function makeToDo(toDoListWrap: HTMLDivElement, todoEl: Todo) {
+function makeToDo(toDoListWrap: HTMLDivElement, todoEl: Todo, index: number) {
     console.log("Todo task:", todoEl.task);
     console.log("Priority:", todoEl.priority);
     console.log("Completed:", todoEl.completed);
@@ -55,9 +62,9 @@ function makeToDo(toDoListWrap: HTMLDivElement, todoEl: Todo) {
     btnDeleteEl.className = "btn-delete";
 
     //Ändra färg beroende på prioritet
-    if(todoEl.priority == 1) {
+    if (todoEl.priority == 1) {
         spanEl.style.backgroundColor = "#074772";
-    } else if(todoEl.priority == 2) {
+    } else if (todoEl.priority == 2) {
         spanEl.style.backgroundColor = "#1874b1";
     } else {
         spanEl.style.backgroundColor = "#50a2da";
@@ -69,9 +76,13 @@ function makeToDo(toDoListWrap: HTMLDivElement, todoEl: Todo) {
     let h3Text = document.createTextNode(todoEl.task);
     let btnFinishText = document.createTextNode("Avklarad");
     let btnDeleteText = document.createTextNode("Ta bort");
+    let btnCheckIcon = document.createElement("i");
+
+    btnCheckIcon.className = "fa-solid fa-check";
 
     //Append textnodes med element
     btnFinishEl.appendChild(btnFinishText);
+    btnFinishEl.appendChild(btnCheckIcon);
     btnDeleteEl.appendChild(btnDeleteText);
     spanEl.appendChild(spanText);
 
@@ -86,6 +97,38 @@ function makeToDo(toDoListWrap: HTMLDivElement, todoEl: Todo) {
 
     toDoListWrap.appendChild(articleEl);
 
+    if(todoEl.completed) {
+        articleEl.className = "todo-completed";
+        btnFinishEl.disabled = true;
+    }
 
+    btnFinishEl.addEventListener("click", () => {
+        todo.markTodoCompleted(index);
+        articleEl.className = "todo-completed";
+        btnFinishEl.disabled = true;
+    });
+
+    btnDeleteEl.addEventListener("click", () => {
+
+        todo.markTodoDeleted(index);
+        // Tar bort och lägger till nya todos
+        refreshTodos();
+
+    });
 }
 
+//Rensa input fälten
+function resetTodoInput(toDoText: HTMLTextAreaElement, selectPrio: HTMLSelectElement): void {
+    toDoText.value = "";
+    selectPrio.value = "1";
+}
+
+function refreshTodos(): void {
+    let toDoListWrap = document.querySelector(".todo-wrap") as HTMLDivElement;
+        toDoListWrap.replaceChildren(); //Tar bort tidigare todos
+
+        todo.getTodos().forEach((todoEl, index) => {
+            makeToDo(toDoListWrap, todoEl, index);
+        });
+
+}

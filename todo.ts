@@ -29,6 +29,14 @@ export class TodoList {
     markTodoCompleted(todoIndex: number): void {
         if (todoIndex >= 0 && todoIndex <= this.todos.length) {
             this.todos[todoIndex].completed = true;
+            this.saveToLocalStorage();
+        }
+    }
+
+    markTodoDeleted(todoIndex: number): void {
+        if (todoIndex >= 0 && todoIndex <= this.todos.length) {
+            this.todos.splice(todoIndex, 1);
+            this.saveToLocalStorage();
         }
     }
 
@@ -46,6 +54,8 @@ export class TodoList {
     }
 
     loadFromLocalStorage(): void {
+
+        console.log("Loading todos from localstorage!");
         let storedTodos = localStorage.getItem('todos') as string;
         if (storedTodos && storedTodos != "") {
             this.todos = JSON.parse(storedTodos);

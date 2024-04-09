@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var todo_1 = require("./todo");
+window.onload = refreshTodos;
 var todo = new todo_1.TodoList();
 console.log(todo.getTodos());
 //Hämta submitknapp
@@ -14,16 +15,19 @@ function submitTodo(event) {
     //Kontrollera tom textsträng
     var trimText = toDoText.value.trim();
     if (trimText !== '') {
-        todo.addTodo(toDoText.value.trim(), Number(selectPrio.value));
-        var toDoListWrap_1 = document.querySelector(".todo-wrap");
-        toDoListWrap_1.replaceChildren(); //Tar bort tidigare todos
-        todo.getTodos().forEach(function (todoEl) {
-            makeToDo(toDoListWrap_1, todoEl);
-        });
+        var newTodo = {};
+        newTodo.task = toDoText.value.trim();
+        newTodo.priority = Number(selectPrio.value);
+        newTodo.completed = false;
+        todo.addTodo(newTodo.task, newTodo.priority);
+        // Tar bort och lägger till nya todos
+        refreshTodos();
+        resetTodoInput(toDoText, selectPrio);
+        todo.saveToLocalStorage();
     }
 }
 //Skriva ut till DOM
-function makeToDo(toDoListWrap, todoEl) {
+function makeToDo(toDoListWrap, todoEl, index) {
     console.log("Todo task:", todoEl.task);
     console.log("Priority:", todoEl.priority);
     console.log("Completed:", todoEl.completed);
@@ -53,8 +57,11 @@ function makeToDo(toDoListWrap, todoEl) {
     var h3Text = document.createTextNode(todoEl.task);
     var btnFinishText = document.createTextNode("Avklarad");
     var btnDeleteText = document.createTextNode("Ta bort");
+    var btnCheckIcon = document.createElement("i");
+    btnCheckIcon.className = "fa-solid fa-check";
     //Append textnodes med element
     btnFinishEl.appendChild(btnFinishText);
+    btnFinishEl.appendChild(btnCheckIcon);
     btnDeleteEl.appendChild(btnDeleteText);
     spanEl.appendChild(spanText);
     //Append element
@@ -65,4 +72,30 @@ function makeToDo(toDoListWrap, todoEl) {
     articleEl.appendChild(h3El);
     articleEl.appendChild(btnWrapEl);
     toDoListWrap.appendChild(articleEl);
+    if (todoEl.completed) {
+        articleEl.className = "todo-completed";
+        btnFinishEl.disabled = true;
+    }
+    btnFinishEl.addEventListener("click", function () {
+        todo.markTodoCompleted(index);
+        articleEl.className = "todo-completed";
+        btnFinishEl.disabled = true;
+    });
+    btnDeleteEl.addEventListener("click", function () {
+        todo.markTodoDeleted(index);
+        // Tar bort och lägger till nya todos
+        refreshTodos();
+    });
+}
+//Rensa input fälten
+function resetTodoInput(toDoText, selectPrio) {
+    toDoText.value = "";
+    selectPrio.value = "1";
+}
+function refreshTodos() {
+    var toDoListWrap = document.querySelector(".todo-wrap");
+    toDoListWrap.replaceChildren(); //Tar bort tidigare todos
+    todo.getTodos().forEach(function (todoEl, index) {
+        makeToDo(toDoListWrap, todoEl, index);
+    });
 }
