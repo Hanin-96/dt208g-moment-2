@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var todo_1 = require("./todo");
 window.onload = refreshTodos;
 var todo = new todo_1.TodoList();
-console.log(todo.getTodos());
+//console.log(todo.getTodos());
 //Hämta submitknapp
 var btnSubmit = document.getElementById("btn-submit");
 btnSubmit.addEventListener("click", submitTodo);
@@ -28,9 +28,9 @@ function submitTodo(event) {
 }
 //Skriva ut till DOM
 function makeToDo(toDoListWrap, todoEl, index) {
-    console.log("Todo task:", todoEl.task);
-    console.log("Priority:", todoEl.priority);
-    console.log("Completed:", todoEl.completed);
+    //console.log("Todo task:", todoEl.task);
+    //console.log("Priority:", todoEl.priority);
+    //console.log("Completed:", todoEl.completed);
     var articleEl = document.createElement("article");
     var h3El = document.createElement("h3");
     var spanEl = document.createElement("span");

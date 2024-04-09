@@ -44,7 +44,7 @@ var TodoList = /** @class */ (function () {
         localStorage.setItem("todos", todosList);
     };
     TodoList.prototype.loadFromLocalStorage = function () {
-        console.log("Loading todos from localstorage!");
+        //console.log("Loading todos from localstorage!");
         var storedTodos = localStorage.getItem('todos');
         if (storedTodos && storedTodos != "") {
             this.todos = JSON.parse(storedTodos);
