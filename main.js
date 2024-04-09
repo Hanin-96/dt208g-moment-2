@@ -75,6 +75,7 @@ function makeToDo(toDoListWrap, todoEl, index) {
     if (todoEl.completed) {
         articleEl.className = "todo-completed";
         btnFinishEl.disabled = true;
+        btnFinishEl.style.cursor = "unset";
     }
     btnFinishEl.addEventListener("click", function () {
         todo.markTodoCompleted(index);
@@ -95,7 +96,8 @@ function resetTodoInput(toDoText, selectPrio) {
 function refreshTodos() {
     var toDoListWrap = document.querySelector(".todo-wrap");
     toDoListWrap.replaceChildren(); //Tar bort tidigare todos
-    todo.getTodos().forEach(function (todoEl, index) {
+    var sortedTodos = todo.getTodos().sort(function (a, b) { return a.priority - b.priority; });
+    sortedTodos.forEach(function (todoEl, index) {
         makeToDo(toDoListWrap, todoEl, index);
     });
 }

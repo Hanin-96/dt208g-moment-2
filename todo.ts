@@ -33,6 +33,7 @@ export class TodoList {
         }
     }
 
+    //Metod för att ta bort todos
     markTodoDeleted(todoIndex: number): void {
         if (todoIndex >= 0 && todoIndex <= this.todos.length) {
             this.todos.splice(todoIndex, 1);

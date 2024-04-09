@@ -100,6 +100,7 @@ function makeToDo(toDoListWrap: HTMLDivElement, todoEl: Todo, index: number) {
     if(todoEl.completed) {
         articleEl.className = "todo-completed";
         btnFinishEl.disabled = true;
+        btnFinishEl.style.cursor = "unset"
     }
 
     btnFinishEl.addEventListener("click", () => {
@@ -127,7 +128,10 @@ function refreshTodos(): void {
     let toDoListWrap = document.querySelector(".todo-wrap") as HTMLDivElement;
         toDoListWrap.replaceChildren(); //Tar bort tidigare todos
 
-        todo.getTodos().forEach((todoEl, index) => {
+        //Sortera todos efter priority ordning
+        const sortedTodos = todo.getTodos().sort((a, b) => a.priority - b.priority);
+
+        sortedTodos.forEach((todoEl, index) => {
             makeToDo(toDoListWrap, todoEl, index);
         });
 
